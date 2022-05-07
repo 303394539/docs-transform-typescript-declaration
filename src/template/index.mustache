@@ -1,0 +1,38 @@
+{{{before}}}
+{{#declarations}}
+{{#comment}}
+/**
+  {{#description}}
+  * @description {{{description}}}
+  {{/description}}
+  {{#link}}
+  * @link {{{.}}}
+  {{/link}}
+  */
+{{/comment}}
+{{#export}}export{{/export}} {{#isTypeStruct}}declare{{/isTypeStruct}} {{struct}} {{{name}}} {{#isTypeStruct}}={{/isTypeStruct}} {
+  {{#fields}}
+  {{#comment}}
+  /**
+    {{#description}}
+    * @description {{{description}}}
+    {{/description}}
+    {{#enum}}
+    * @enum {{{enum}}}
+    {{/enum}}
+    {{#example}}
+    * @example {{{example}}}
+    {{/example}}
+    {{#default}}
+    * @default {{{default}}}
+    {{/default}}
+    {{#deprecated}}
+    * @deprecated {{{deprecated}}}
+    {{/deprecated}}
+    */
+  {{/comment}}
+  {{name}}{{^required}}?{{/required}}: {{{type}}};
+  {{/fields}}
+}
+{{/declarations}}
+{{{after}}}

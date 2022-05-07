@@ -1,0 +1,77 @@
+{
+  "paths": {
+    "/dto2": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dto2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dto2List": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dto2"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Dto1": {
+        "type": "object",
+        "properties": {
+          "field1": {
+            "type": "string",
+            "description": "description",
+            "enum": ["A"]
+          },
+          "field2": {
+            "originalRef": "Dto2",
+            "description": "description"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "originalRef": "Dto2"
+            }
+          }
+        },
+        "xml": {
+          "name": "Dto1"
+        }
+      },
+      "Dto2": {
+        "properties": {},
+        "xml": {
+          "name": "Dto2"
+        }
+      },
+      "中文": {
+        "type": "object",
+        "properties": {},
+        "xml": {
+          "name": "中文"
+        }
+      }
+    }
+  }
+}

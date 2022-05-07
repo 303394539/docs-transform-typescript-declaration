@@ -1,0 +1,47 @@
+{
+  "paths": {
+    "/dto2": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "originalRef": "Dto2"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Dto1": {
+      "type": "object",
+      "properties": {
+        "field1": {
+          "type": "string",
+          "description": "description",
+          "enum": ["A"]
+        },
+        "field2": {
+          "originalRef": "Dto2",
+          "description": "description"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "originalRef": "Dto2"
+          }
+        }
+      },
+      "title": "Dto1"
+    },
+    "Dto2": {
+      "properties": {},
+      "title": "Dto2"
+    },
+    "中文": {
+      "type": "object",
+      "properties": {},
+      "title": "中文"
+    }
+  }
+}

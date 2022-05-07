@@ -1,0 +1,9 @@
+{
+  "extends": "@baic/eslint-config-yolk",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "class-methods-use-this": 0
+  }
+}
