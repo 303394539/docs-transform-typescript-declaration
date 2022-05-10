@@ -317,8 +317,12 @@ export default class DeclaratioLoader {
           parser: 'typescript',
         },
       );
+      const dirPath = path.join(process.cwd(), outputPath);
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
       const fileName = `${name}.${suffix}`;
-      const filePath = path.join(process.cwd(), outputPath, fileName);
+      const filePath = path.join(dirPath, fileName);
       fs.writeFileSync(filePath, content, 'utf-8');
       return {
         content,
