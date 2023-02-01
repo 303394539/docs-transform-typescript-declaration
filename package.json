@@ -1,6 +1,6 @@
 {
   "name": "@baic/docs-transform-typescript-declaration",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "lint": "eslint ./src --ext .ts,.tsx --fix",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
