@@ -70,7 +70,7 @@ test('template', () => {
           */
           name: string;
         }
-        type Dto2 = {
+        declare type Dto2 = {
           name?: string;
         };
       `,
@@ -101,7 +101,7 @@ test('Swagger2Loader', async () => {
   const content = fs.readFileSync(filePath, 'utf-8');
   expect(content).toEqual(
     format(
-      `export type Dto1 = {
+      `export declare type Dto1 = {
         /**
          * @description description
          * @enum ["A"]
@@ -116,7 +116,7 @@ test('Swagger2Loader', async () => {
       /**
        * @link /dto2
        */
-      export type Dto2 = {}
+      export declare type Dto2 = {}
       `,
       { parser: 'typescript' },
     ),
@@ -129,9 +129,9 @@ test('Swagger3Loader', async () => {
     name: 'swagger3',
     outputPath: 'src/__test__',
     template: {
-      before: 'type Before = {};',
+      before: 'declare type Before = {};',
       filePath: TEMPLATE_FILE_PATH,
-      after: 'type After = {};',
+      after: 'declare type After = {};',
     },
     dataLoader: async () => {
       const data = fs.readFileSync(
@@ -149,8 +149,8 @@ test('Swagger3Loader', async () => {
   expect(content).toEqual(
     format(
       `
-      type Before = {};
-      export type Dto1 = {
+      declare type Before = {};
+      export declare type Dto1 = {
         /**
          * @description description
          * @enum ["A"]
@@ -166,8 +166,8 @@ test('Swagger3Loader', async () => {
        * @link /dto2
        * @link /dto2List
        */
-      export type Dto2 = {}
-      type After = {};
+      export declare type Dto2 = {}
+      declare type After = {};
       `,
       { parser: 'typescript' },
     ),
