@@ -1,8 +1,6 @@
-import { MappingValues, Keys, Values, FieldMapping } from '../../mapping';
-
-import FieldsCommentMappingClass from './FieldsCommentMappingClass';
-
 import { clearInvalidStr, isCn } from '../../_utils';
+import { FieldMapping, Keys, MappingValues, Values } from '../../mapping';
+import FieldsCommentMappingClass from './FieldsCommentMappingClass';
 
 @MappingValues('properties')
 export default class FieldMappingClass implements FieldMapping {

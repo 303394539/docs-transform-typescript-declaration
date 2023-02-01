@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { MappingValues, Value, CommentMapping } from '../../mapping';
+import { CommentMapping, MappingValues, Value } from '../../mapping';
 
 @MappingValues()
 export default class FieldCommentMappingClass implements CommentMapping {

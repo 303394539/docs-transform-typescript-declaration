@@ -4,6 +4,6 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "class-methods-use-this": 0
+    "@typescript-eslint/no-explicit-any": 0
   }
 }

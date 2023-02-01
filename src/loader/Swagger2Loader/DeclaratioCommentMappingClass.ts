@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
-import { RootValue, CommentMapping } from '../../mapping';
-
 import { clearInvalidStr } from '../../_utils';
+import { CommentMapping, RootValue } from '../../mapping';
 
 export default class DeclaratioCommentMappingClass implements CommentMapping {
   @RootValue('paths')

@@ -1,23 +1,19 @@
-import _ from 'lodash';
-
 import fs from 'fs';
-
 import path from 'path';
 
-import mustache from 'mustache';
+import _ from 'lodash';
 
+import mustache from 'mustache';
 import { format } from 'prettier';
 
 import { TEMPLATE_FILE_PATH } from '../constants';
-
-import { Template, Declaration, Comment, Field, Struct } from '../template';
-
 import {
-  DeclaratioMapping,
   CommentMapping,
+  DeclaratioMapping,
   FieldMapping,
   MappingObject,
 } from '../mapping';
+import { Comment, Declaration, Field, Struct, Template } from '../template';
 
 export type DeclaratioLoaderOptions = {
   /**
@@ -65,7 +61,7 @@ export type DeclaratioLoaderOptions = {
    * @description 生成规则
    */
   mapping?: DeclaratioMapping;
-}
+};
 
 function getMappingData(mappingObject?: MappingObject, obj?: any, data?: any) {
   if (mappingObject) {

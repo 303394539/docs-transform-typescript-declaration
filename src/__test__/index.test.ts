@@ -1,13 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import mustache from 'mustache';
-import rimraf from 'rimraf';
-import { format } from 'prettier';
 
 import _ from 'lodash';
 
-import { Swagger2Loader, Swagger3Loader } from '..';
+import mustache from 'mustache';
+import { format } from 'prettier';
+import rimraf from 'rimraf';
 
+import { Swagger2Loader, Swagger3Loader } from '..';
 import { TEMPLATE_FILE_PATH } from '../constants';
 
 test('template', () => {

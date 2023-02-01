@@ -1,10 +1,7 @@
-import { MappingRootValue, Values, DeclaratioMapping } from '../../mapping';
-
-import DeclaratioCommentMappingClass from './DeclaratioCommentMappingClass';
-
-import FieldsMappingClass from './FieldsMappingClass';
-
 import { clearInvalidStr, isCn } from '../../_utils';
+import { DeclaratioMapping, MappingRootValue, Values } from '../../mapping';
+import DeclaratioCommentMappingClass from './DeclaratioCommentMappingClass';
+import FieldsMappingClass from './FieldsMappingClass';
 
 @MappingRootValue('definitions')
 export default class DeclaratioMappingClass implements DeclaratioMapping {

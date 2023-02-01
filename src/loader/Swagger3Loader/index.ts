@@ -1,15 +1,14 @@
 import DeclaratioLoader, { DeclaratioLoaderOptions } from '../DeclaratioLoader';
-
-import DeclaratioMappingClass from './DeclaratioMappingClass';
 import DeclaratioCommentMappingClass from '../Swagger2Loader/DeclaratioCommentMappingClass';
-import FieldsMappingClass from '../Swagger2Loader/FieldsMappingClass';
 import FieldsCommentMappingClass from '../Swagger2Loader/FieldsCommentMappingClass';
+import FieldsMappingClass from '../Swagger2Loader/FieldsMappingClass';
+import DeclaratioMappingClass from './DeclaratioMappingClass';
 
 export {
-  DeclaratioMappingClass,
   DeclaratioCommentMappingClass,
-  FieldsMappingClass,
+  DeclaratioMappingClass,
   FieldsCommentMappingClass,
+  FieldsMappingClass,
 };
 
 export default function Swagger3Loader(options?: DeclaratioLoaderOptions) {
