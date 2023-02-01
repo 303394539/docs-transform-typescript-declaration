@@ -33,6 +33,6 @@
   {{/comment}}
   {{name}}{{^required}}?{{/required}}: {{{type}}};
   {{/fields}}
-}
+}{{#isTypeStruct}};{{/isTypeStruct}}
 {{/declarations}}
 {{{after}}}
