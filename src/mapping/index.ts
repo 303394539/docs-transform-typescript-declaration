@@ -1,6 +1,6 @@
 import { Declaration, Comment, Field } from '../template';
 
-export interface MappingObject {
+export type MappingObject = {
   pickData?: (obj: any, data: any) => any;
 }
 

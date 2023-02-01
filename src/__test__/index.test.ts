@@ -70,9 +70,9 @@ test('template', () => {
           */
           name: string;
         }
-        declare type Dto2 = {
+        type Dto2 = {
           name?: string;
-        }
+        };
       `,
       { parser: 'typescript' },
     ),
@@ -101,7 +101,7 @@ test('Swagger2Loader', async () => {
   const content = fs.readFileSync(filePath, 'utf-8');
   expect(content).toEqual(
     format(
-      `export interface Dto1 {
+      `export type Dto1 = {
         /**
          * @description description
          * @enum ["A"]
@@ -116,15 +116,12 @@ test('Swagger2Loader', async () => {
       /**
        * @link /dto2
        */
-      export interface Dto2 {}
+      export type Dto2 = {}
       `,
       { parser: 'typescript' },
     ),
   );
-  rimraf(
-    path.join(process.cwd(), 'src', '__test__', 'swagger2.d.ts'),
-    () => {},
-  );
+  rimraf(path.join(process.cwd(), 'src', '__test__', 'swagger2.d.ts'));
 });
 
 test('Swagger3Loader', async () => {
@@ -153,7 +150,7 @@ test('Swagger3Loader', async () => {
     format(
       `
       type Before = {};
-      export interface Dto1 {
+      export type Dto1 = {
         /**
          * @description description
          * @enum ["A"]
@@ -169,14 +166,11 @@ test('Swagger3Loader', async () => {
        * @link /dto2
        * @link /dto2List
        */
-      export interface Dto2 {}
+      export type Dto2 = {}
       type After = {};
       `,
       { parser: 'typescript' },
     ),
   );
-  rimraf(
-    path.join(process.cwd(), 'src', '__test__', 'swagger3.d.ts'),
-    () => {},
-  );
+  rimraf(path.join(process.cwd(), 'src', '__test__', 'swagger3.d.ts'));
 });

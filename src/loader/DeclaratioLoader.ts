@@ -19,7 +19,7 @@ import {
   MappingObject,
 } from '../mapping';
 
-export interface DeclaratioLoaderOptions {
+export type DeclaratioLoaderOptions = {
   /**
    * @description 类型文件的后缀
    * @default d.ts
@@ -221,9 +221,12 @@ function declarationFactory(
       (item: any, index: number) => {
         const intf: Declaration = {
           export: true,
-          struct: struct || 'interface',
+          struct: struct || 'type',
           isTypeStruct: false,
         };
+        if ('type' === intf.struct) {
+          intf.isTypeStruct = true;
+        }
         if (_.isFunction(mappingName)) {
           intf.name = mappingName(item, data);
         }
