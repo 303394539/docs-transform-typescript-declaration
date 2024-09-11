@@ -25,7 +25,6 @@
   "dependencies": {
     "@types/lodash": "4.x",
     "@types/prettier": "2.x",
-    "chalk": "5.x",
     "lodash": "4.x",
     "prettier": "2.x"
   },
