@@ -1,11 +1,11 @@
-import fs from 'fs';
-import path from 'path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 
 import { compact, isFunction, values } from 'lodash';
 
 import { format } from 'prettier';
 
-import mustache from '../../compiled/mustache';
+import { render } from '../../compiled/mustache';
 import { TEMPLATE_FILE_PATH } from '../constants';
 import type {
   CommentMapping,
@@ -310,25 +310,22 @@ export default class DeclaratioLoader {
     if (data) {
       const declarations = declarationFactory(mapping || {}, data, struct);
       const content = format(
-        mustache.render(
-          fs.readFileSync(templateFilePath || TEMPLATE_FILE_PATH, 'utf-8'),
-          {
-            declarations,
-            before,
-            after,
-          } as Template,
-        ),
+        render(readFileSync(templateFilePath || TEMPLATE_FILE_PATH, 'utf-8'), {
+          declarations,
+          before,
+          after,
+        } as Template),
         {
           parser: 'typescript',
         },
       );
-      const dirPath = path.join(process.cwd(), outputPath);
-      if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true });
+      const dirPath = join(process.cwd(), outputPath);
+      if (!existsSync(dirPath)) {
+        mkdirSync(dirPath, { recursive: true });
       }
       const fileName = `${name}.${suffix}`;
-      const filePath = path.join(dirPath, fileName);
-      fs.writeFileSync(filePath, content, 'utf-8');
+      const filePath = join(dirPath, fileName);
+      writeFileSync(filePath, content, 'utf-8');
       return {
         content,
         fileName,

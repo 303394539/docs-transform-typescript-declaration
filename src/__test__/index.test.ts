@@ -1,18 +1,18 @@
-import fs from 'fs';
-import path from 'path';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 import { isString } from 'lodash';
 
 import { format } from 'prettier';
 import { rimrafSync } from 'rimraf';
 
-import mustache from '../../compiled/mustache';
+import { render } from '../../compiled/mustache';
 import { Swagger2Loader, Swagger3Loader } from '..';
 import { TEMPLATE_FILE_PATH } from '../constants';
 
 test('template', () => {
   const content = format(
-    mustache.render(fs.readFileSync(TEMPLATE_FILE_PATH, 'utf-8'), {
+    render(readFileSync(TEMPLATE_FILE_PATH, 'utf-8'), {
       declarations: [
         {
           comment: {
@@ -87,8 +87,8 @@ test('Swagger2Loader', async () => {
       filePath: TEMPLATE_FILE_PATH,
     },
     dataLoader: async () => {
-      const data = fs.readFileSync(
-        path.join(process.cwd(), 'src', '__test__', 'swagger2.test.json'),
+      const data = readFileSync(
+        join(process.cwd(), 'src', '__test__', 'swagger2.test.json'),
         'utf-8',
       );
       if (isString(data)) {
@@ -97,8 +97,8 @@ test('Swagger2Loader', async () => {
       return data;
     },
   }).run();
-  const filePath = path.join(process.cwd(), 'src', '__test__', 'swagger2.d.ts');
-  const content = fs.readFileSync(filePath, 'utf-8');
+  const filePath = join(process.cwd(), 'src', '__test__', 'swagger2.d.ts');
+  const content = readFileSync(filePath, 'utf-8');
   expect(content).toEqual(
     format(
       `export declare type Dto1 = {
@@ -121,7 +121,7 @@ test('Swagger2Loader', async () => {
       { parser: 'typescript' },
     ),
   );
-  rimrafSync(path.join(process.cwd(), 'src', '__test__', 'swagger2.d.ts'));
+  rimrafSync(join(process.cwd(), 'src', '__test__', 'swagger2.d.ts'));
 });
 
 test('Swagger3Loader', async () => {
@@ -134,8 +134,8 @@ test('Swagger3Loader', async () => {
       after: 'declare type After = {};',
     },
     dataLoader: async () => {
-      const data = fs.readFileSync(
-        path.join(process.cwd(), 'src', '__test__', 'swagger3.test.json'),
+      const data = readFileSync(
+        join(process.cwd(), 'src', '__test__', 'swagger3.test.json'),
         'utf-8',
       );
       if (isString(data)) {
@@ -144,8 +144,8 @@ test('Swagger3Loader', async () => {
       return data;
     },
   }).run();
-  const filePath = path.join(process.cwd(), 'src', '__test__', 'swagger3.d.ts');
-  const content = fs.readFileSync(filePath, 'utf-8');
+  const filePath = join(process.cwd(), 'src', '__test__', 'swagger3.d.ts');
+  const content = readFileSync(filePath, 'utf-8');
   expect(content).toEqual(
     format(
       `
@@ -172,5 +172,5 @@ test('Swagger3Loader', async () => {
       { parser: 'typescript' },
     ),
   );
-  rimrafSync(path.join(process.cwd(), 'src', '__test__', 'swagger3.d.ts'));
+  rimrafSync(join(process.cwd(), 'src', '__test__', 'swagger3.d.ts'));
 });
