@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "declaration": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    // "importsNotUsedAsValues": "error",
+    "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "baseUrl": "./",
-    "rootDir": "./",
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
+    "noImplicitReturns": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "experimentalDecorators": true,
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    // "suppressExcessPropertyErrors": true, // 避免出现react18 children类型删除报错
+    // "suppressImplicitAnyIndexErrors": true,
+    "target": "esnext",
+    /**
+     * typescript@5
+     **/
+    "noImplicitAny": true,
+    "verbatimModuleSyntax": true
   }
 }

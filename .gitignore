@@ -8,6 +8,7 @@
 
 # production
 /lib
+/es
 
 # misc
 .DS_Store

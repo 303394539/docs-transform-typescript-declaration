@@ -1,6 +1,7 @@
-import _ from 'lodash';
+import { isString } from 'lodash';
 
-import { CommentMapping, MappingValues, Value } from '../../mapping';
+import type { CommentMapping } from '../../mapping';
+import { MappingValues, Value } from '../../mapping';
 
 @MappingValues()
 export default class FieldCommentMappingClass implements CommentMapping {
@@ -16,7 +17,7 @@ export default class FieldCommentMappingClass implements CommentMapping {
 
   @Value('enum')
   enum(value?: any) {
-    return _.isString(value) ? value : JSON.stringify(value);
+    return isString(value) ? value : JSON.stringify(value);
   }
 
   @Value('default')

@@ -1,4 +1,4 @@
-import { Comment, Declaration, Field } from '../template';
+import type { Comment, Declaration, Field } from '../template';
 
 export type MappingObject = {
   pickData?: (obj: any, data: any) => any;

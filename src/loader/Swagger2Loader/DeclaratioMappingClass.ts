@@ -1,5 +1,6 @@
 import { clearInvalidStr, isCn } from '../../_utils';
-import { DeclaratioMapping, MappingRootValue, Values } from '../../mapping';
+import type { DeclaratioMapping } from '../../mapping';
+import { MappingRootValue, Values } from '../../mapping';
 import DeclaratioCommentMappingClass from './DeclaratioCommentMappingClass';
 import FieldsMappingClass from './FieldsMappingClass';
 

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isNil, values } from 'lodash';
 
 import Value from './Value';
 
@@ -15,8 +15,8 @@ export default function Values(...args: string[]) {
     const { value: originValue = {} } = descriptor;
     originValue.pickData = (data: any) => {
       let res = [];
-      if (!_.isNil(data) && !_.isArray(data)) {
-        res = _.values(data);
+      if (!isNil(data) && !Array.isArray(data)) {
+        res = values(data);
         if (args.length) {
           const { value: $value } = Value(...args)(target, propertyKey, {});
           res = res.map((item) => $value.pickData(item));

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { get, isNil } from 'lodash';
 
 /**
  * @description 提取数据的指定属性给mapping的方法
@@ -17,8 +17,8 @@ export default function Value(...args: string[]) {
       }
       let res: any;
       args.forEach((arg: string) => {
-        if (_.isNil(res)) {
-          res = _.get(data, arg);
+        if (isNil(res)) {
+          res = get(data, arg);
         }
       });
       return res;

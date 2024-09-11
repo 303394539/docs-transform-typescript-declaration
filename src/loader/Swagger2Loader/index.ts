@@ -1,4 +1,5 @@
-import DeclaratioLoader, { DeclaratioLoaderOptions } from '../DeclaratioLoader';
+import type { DeclaratioLoaderOptions } from '../DeclaratioLoader';
+import DeclaratioLoader from '../DeclaratioLoader';
 import DeclaratioCommentMappingClass from './DeclaratioCommentMappingClass';
 import DeclaratioMappingClass from './DeclaratioMappingClass';
 import FieldsCommentMappingClass from './FieldsCommentMappingClass';

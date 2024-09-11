@@ -1,5 +1,6 @@
 import { clearInvalidStr, isCn } from '../../_utils';
-import { FieldMapping, Keys, MappingValues, Values } from '../../mapping';
+import type { FieldMapping } from '../../mapping';
+import { Keys, MappingValues, Values } from '../../mapping';
 import FieldsCommentMappingClass from './FieldsCommentMappingClass';
 
 @MappingValues('properties')

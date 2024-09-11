@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-import _ from 'lodash';
+import { isString } from 'lodash';
 
-import mustache from 'mustache';
 import { format } from 'prettier';
-import rimraf from 'rimraf';
+import { rimrafSync } from 'rimraf';
 
+import mustache from '../../compiled/mustache';
 import { Swagger2Loader, Swagger3Loader } from '..';
 import { TEMPLATE_FILE_PATH } from '../constants';
 
@@ -91,7 +91,7 @@ test('Swagger2Loader', async () => {
         path.join(process.cwd(), 'src', '__test__', 'swagger2.test.json'),
         'utf-8',
       );
-      if (_.isString(data)) {
+      if (isString(data)) {
         return JSON.parse(data);
       }
       return data;
@@ -121,7 +121,7 @@ test('Swagger2Loader', async () => {
       { parser: 'typescript' },
     ),
   );
-  rimraf(path.join(process.cwd(), 'src', '__test__', 'swagger2.d.ts'));
+  rimrafSync(path.join(process.cwd(), 'src', '__test__', 'swagger2.d.ts'));
 });
 
 test('Swagger3Loader', async () => {
@@ -138,7 +138,7 @@ test('Swagger3Loader', async () => {
         path.join(process.cwd(), 'src', '__test__', 'swagger3.test.json'),
         'utf-8',
       );
-      if (_.isString(data)) {
+      if (isString(data)) {
         return JSON.parse(data);
       }
       return data;
@@ -172,5 +172,5 @@ test('Swagger3Loader', async () => {
       { parser: 'typescript' },
     ),
   );
-  rimraf(path.join(process.cwd(), 'src', '__test__', 'swagger3.d.ts'));
+  rimrafSync(path.join(process.cwd(), 'src', '__test__', 'swagger3.d.ts'));
 });

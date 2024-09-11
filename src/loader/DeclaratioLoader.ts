@@ -1,19 +1,25 @@
 import fs from 'fs';
 import path from 'path';
 
-import _ from 'lodash';
+import { compact, isFunction, values } from 'lodash';
 
-import mustache from 'mustache';
 import { format } from 'prettier';
 
+import mustache from '../../compiled/mustache';
 import { TEMPLATE_FILE_PATH } from '../constants';
-import {
+import type {
   CommentMapping,
   DeclaratioMapping,
   FieldMapping,
   MappingObject,
 } from '../mapping';
-import { Comment, Declaration, Field, Struct, Template } from '../template';
+import type {
+  Comment,
+  Declaration,
+  Field,
+  Struct,
+  Template,
+} from '../template';
 
 export type DeclaratioLoaderOptions = {
   /**
@@ -66,7 +72,7 @@ export type DeclaratioLoaderOptions = {
 function getMappingData(mappingObject?: MappingObject, obj?: any, data?: any) {
   if (mappingObject) {
     const { pickData } = mappingObject;
-    if (_.isFunction(pickData)) {
+    if (isFunction(pickData)) {
       return pickData(obj, data);
     }
   }
@@ -88,7 +94,7 @@ function commentFactory(
     enum: mappingEnum,
     link,
   } = mapping;
-  if (_.isFunction(deprecated)) {
+  if (isFunction(deprecated)) {
     comment.deprecated = deprecated(
       getMappingData(deprecated, obj, data),
       node,
@@ -96,7 +102,7 @@ function commentFactory(
       data,
     );
   }
-  if (_.isFunction(description)) {
+  if (isFunction(description)) {
     comment.description = description(
       getMappingData(description, obj, data),
       node,
@@ -104,7 +110,7 @@ function commentFactory(
       data,
     );
   }
-  if (_.isFunction(example)) {
+  if (isFunction(example)) {
     comment.example = example(
       getMappingData(example, obj, data),
       node,
@@ -112,7 +118,7 @@ function commentFactory(
       data,
     );
   }
-  if (_.isFunction(mappingDefault)) {
+  if (isFunction(mappingDefault)) {
     comment.default = mappingDefault(
       getMappingData(mappingDefault, obj, data),
       node,
@@ -120,7 +126,7 @@ function commentFactory(
       data,
     );
   }
-  if (_.isFunction(mappingEnum)) {
+  if (isFunction(mappingEnum)) {
     comment.enum = mappingEnum(
       getMappingData(mappingEnum, obj, data),
       node,
@@ -128,16 +134,16 @@ function commentFactory(
       data,
     );
   }
-  if (_.isFunction(link)) {
+  if (isFunction(link)) {
     comment.link = link(getMappingData(link, obj, data), node, obj, data);
   }
-  return _.compact(
-    _.values(comment).filter((item) =>
-      _.isArray(item) ? item.length : !!item,
+  return compact(
+    values(comment).filter((item) =>
+      Array.isArray(item) ? item.length : !!item,
     ),
   ).length
     ? comment
-    : undefined;
+    : void 0;
 }
 
 function fieldsFactory(
@@ -152,24 +158,24 @@ function fieldsFactory(
   const requiredData = getMappingData(required, obj, data);
   const typeData = getMappingData(type, obj, data);
   const commentData = getMappingData(commentMapping, obj, data);
-  (_.isArray(nameData) ? nameData : [nameData]).forEach(
+  (Array.isArray(nameData) ? nameData : [nameData]).forEach(
     (item: any, index: number) => {
       const field: Field = {};
-      if (_.isFunction(name)) {
+      if (isFunction(name)) {
         field.name = name(item, node, obj, data);
       }
-      if (_.isFunction(type) && typeData) {
+      if (isFunction(type) && typeData) {
         field.type = type(
-          _.isArray(typeData) ? typeData[index] : typeData,
+          Array.isArray(typeData) ? typeData[index] : typeData,
           node,
           obj,
           data,
         );
       }
       if (field.name && field.type) {
-        if (_.isFunction(required) && requiredData) {
+        if (isFunction(required) && requiredData) {
           field.required = required(
-            _.isArray(requiredData) ? requiredData[index] : requiredData,
+            Array.isArray(requiredData) ? requiredData[index] : requiredData,
             node,
             obj,
             data,
@@ -179,7 +185,7 @@ function fieldsFactory(
           field.comment = commentFactory(
             commentMapping,
             field,
-            _.isArray(commentData) ? commentData[index] : commentData,
+            Array.isArray(commentData) ? commentData[index] : commentData,
             data,
           );
         }
@@ -208,12 +214,12 @@ function declarationFactory(
     const nameData = getMappingData(mappingName, mappingData, data);
     const exportData = getMappingData(mappingExport, mappingData, data);
     let structData: any;
-    if (_.isFunction(mappingStruct)) {
+    if (isFunction(mappingStruct)) {
       structData = getMappingData(mappingStruct, mappingData, data);
     }
     const commentData = getMappingData(commentMapping, mappingData, data);
     const fieldsData = getMappingData(fieldsMapping, mappingData, data);
-    (_.isArray(nameData) ? nameData : [nameData]).forEach(
+    (Array.isArray(nameData) ? nameData : [nameData]).forEach(
       (item: any, index: number) => {
         const intf: Declaration = {
           export: true,
@@ -223,19 +229,19 @@ function declarationFactory(
         if ('type' === intf.struct) {
           intf.isTypeStruct = true;
         }
-        if (_.isFunction(mappingName)) {
+        if (isFunction(mappingName)) {
           intf.name = mappingName(item, data);
         }
         if (intf.name) {
-          if (_.isFunction(mappingExport) && exportData) {
+          if (isFunction(mappingExport) && exportData) {
             intf.export = mappingExport(
-              _.isArray(exportData) ? exportData[index] : exportData,
+              Array.isArray(exportData) ? exportData[index] : exportData,
               data,
             );
           }
-          if (_.isFunction(mappingStruct) && structData) {
+          if (isFunction(mappingStruct) && structData) {
             intf.struct = mappingStruct(
-              _.isArray(structData) ? structData[index] : structData,
+              Array.isArray(structData) ? structData[index] : structData,
               data,
             );
             if ('type' === intf.struct) {
@@ -246,7 +252,7 @@ function declarationFactory(
             intf.comment = commentFactory(
               commentMapping,
               intf,
-              _.isArray(commentData) ? commentData[index] : commentData,
+              Array.isArray(commentData) ? commentData[index] : commentData,
               data,
             );
           }
@@ -254,7 +260,7 @@ function declarationFactory(
             intf.fields = fieldsFactory(
               fieldsMapping,
               intf,
-              _.isArray(fieldsData) ? fieldsData[index] : fieldsData,
+              Array.isArray(fieldsData) ? fieldsData[index] : fieldsData,
               data,
             );
           }
@@ -298,7 +304,7 @@ export default class DeclaratioLoader {
       after = '',
     } = template || {};
     let data;
-    if (_.isFunction(dataLoader)) {
+    if (isFunction(dataLoader)) {
       data = await dataLoader();
     }
     if (data) {
