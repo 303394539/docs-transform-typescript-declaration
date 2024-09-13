@@ -5,7 +5,8 @@
         "responses": {
           "200": {
             "schema": {
-              "originalRef": "Dto2"
+              "originalRef": "Dto2",
+              "$ref": "#/definitions/Dto2"
             }
           }
         }
