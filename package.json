@@ -1,6 +1,6 @@
 {
   "name": "@baic/docs-transform-typescript-declaration",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/303394539/docs-transform-typescript-declaration.git"
