@@ -15,16 +15,16 @@ export default class DeclaratioCommentMappingClass implements CommentMapping {
       const originalRef: string = get(
         value[link],
         `get.${originalRefPath}`,
-        get(value[link], `post.${originalRefPath}`, {}),
+        get(value[link], `post.${originalRefPath}`),
       );
-      const $ref: string = get(
+      const $refArr: string = get(
         value[link],
         `get.${$refPath}`,
-        get(value[link], `post.${$refPath}`, {}),
-      );
+        get(value[link], `post.${$refPath}`),
+      )?.split('/');
       if (
         clearInvalidStr(originalRef) === name ||
-        $ref?.lastIndexOf(name) === 0
+        clearInvalidStr($refArr?.[$refArr.length - 1]) === name
       ) {
         links.push(link);
       }

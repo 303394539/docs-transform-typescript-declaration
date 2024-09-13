@@ -10,16 +10,25 @@ export default class DeclaratioCommentMappingClass implements CommentMapping {
     const { name } = node;
     const links: string[] = [];
     keys(value).forEach((link) => {
-      const dataPath = 'responses.200.content.application/json.schema';
+      const schemaPath = 'responses.200.content.*/*.schema';
+      const jsonSchemaPath = 'responses.200.content.application/json.schema';
       const schema = get(
         value[link],
-        `get.${dataPath}`,
-        get(value[link], `post.${dataPath}`, {}),
+        `get.${jsonSchemaPath}`,
+        get(
+          value[link],
+          `post.${jsonSchemaPath}`,
+          get(
+            value[link],
+            `get.${schemaPath}`,
+            get(value[link], `post.${schemaPath}`),
+          ),
+        ),
       );
-      const ref = (
+      const refArr = (
         schema.$ref || (schema.items ? schema.items.$ref || '' : '')
-      ).split('/');
-      if (clearInvalidStr(ref[ref.length - 1]) === name) {
+      )?.split('/');
+      if (clearInvalidStr(refArr?.[refArr.length - 1]) === name) {
         links.push(link);
       }
     });

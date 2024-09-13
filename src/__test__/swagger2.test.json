@@ -1,4 +1,5 @@
 {
+  "swagger": "2.0",
   "paths": {
     "/dto2": {
       "get": {
