@@ -1,6 +1,6 @@
-import path from 'path';
+import { join } from 'node:path';
 
-export const TEMPLATE_FILE_PATH = path.join(
+export const TEMPLATE_FILE_PATH = join(
   __dirname,
   'template',
   'index.mustache',

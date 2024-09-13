@@ -1,5 +1,5 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { isAbsolute, join } from 'node:path';
 
 import { compact, isFunction, values } from 'lodash';
 
@@ -319,7 +319,9 @@ export default class DeclaratioLoader {
           parser: 'typescript',
         },
       );
-      const dirPath = join(process.cwd(), outputPath);
+      const dirPath = isAbsolute(outputPath)
+        ? outputPath
+        : join(process.cwd(), outputPath);
       if (!existsSync(dirPath)) {
         mkdirSync(dirPath, { recursive: true });
       }
