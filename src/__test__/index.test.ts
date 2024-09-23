@@ -3,6 +3,8 @@ import { join } from 'node:path';
 
 import { isString } from 'lodash';
 
+import { expect, test } from 'vitest';
+
 import { format } from 'prettier';
 
 import { render } from '../../compiled/mustache';
@@ -11,7 +13,7 @@ import { TEMPLATE_FILE_PATH } from '../constants';
 
 const srcPath = join(process.cwd(), 'src');
 const testPath = join(srcPath, '__test__');
-const cachePath = join(process.cwd(), 'node_modules', '.cache', 'jest');
+const cachePath = join(process.cwd(), 'node_modules', '.cache', 'test');
 
 test('template', () => {
   const content = format(
